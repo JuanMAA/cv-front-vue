@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const domain = ref('gabbo.cl');
 const name = ref('Juan Gabriel Mansilla');
 const profession = ref('Full Stack Developer');
 const resume = ref(
-  'Soy un apasionado desarrollador Full Stack especializado en Vue.js, JavaScript, Node.js y Express.js.'
+  'Desarrollador Full Stack especializado en Vue.js, JavaScript, Node.js y Express.js.'
 );
 
 const contact = ref([
@@ -30,13 +30,22 @@ const socialMedia = ref([
     link: 'https://twitter.com/jmansilla_dev',
     iconClass: 'fab fa-twitter', // Clase del icono de Font Awesome para Twitter
   },
-  // Agrega más redes sociales según sea necesario
+  {
+    platform: 'Instagram',
+    link: 'https://twitter.com/jmansilla_dev',
+    iconClass: 'fab fa-instagram', // Clase del icono de Font Awesome para Twitter
+  }
 ]);
 const education = ref([
   {
     institution: 'Platzi',
     degree: 'Front-End con Vue',
     year: '2023',
+  },
+    {
+    institution: 'Platzi',
+    degree: 'Backend con Node.js',
+    year: 'En Proceso',
   },
 ]);
 
@@ -74,28 +83,7 @@ const courses = ref([
     name: 'Curso de Desarrollo Web',
     institution: 'Platzi',
     year: '2022',
-  },
-  {
-    name: 'Curso de Desarrollo Web',
-    institution: 'Platzi',
-    year: '2022',
-  },
-  {
-    name: 'Curso de Desarrollo Web',
-    institution: 'Platzi',
-    year: '2022',
-  },
-  {
-    name: 'Curso de Desarrollo Web',
-    institution: 'Platzi',
-    year: '2022',
-  },
-  {
-    name: 'Curso de Desarrollo Web',
-    institution: 'Platzi',
-    year: '2022',
-  },
-  // Agrega más cursos según sea necesario
+  }
 ]);
 
 const portfolio = ref([
@@ -115,6 +103,43 @@ const portfolio = ref([
   },
   // Agrega más proyectos según sea necesario
 ]);
+
+const activeItem = ref(null);
+
+const handleScroll = () => {
+  const scrollPosition = window.scrollY;
+
+  for (const section of sections.value) {
+    const sectionElement = document.getElementById(section.id);
+
+    if (sectionElement) {
+      const rect = sectionElement.getBoundingClientRect();
+      const isInView = rect.top <= 0 && rect.bottom >= 0;
+
+      if (isInView) {
+        activeItem.value = section.id;
+      }
+    }
+  }
+};
+
+const scrollToSection = (sectionId) => {
+  const sectionElement = document.getElementById(sectionId);
+
+  if (sectionElement) {
+    sectionElement.scrollIntoView({ behavior: 'smooth' });
+    activeItem.value = sectionId;
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
+
 </script>
 
 <template>
@@ -122,37 +147,41 @@ const portfolio = ref([
     <div class="left-section">
       <div class="text-center banner-container" >
         <img  src="/gabbo.svg" class="logo-image" alt="Vite logo" />
-    <div class="logo-description">
-        <p class="title-text">{{ name }}</p>
-        <p class="description-text">{{ resume }}</p>
-        <p class="social-text">
-          <span v-for="(social, index) in socialMedia" :key="index">
-            <i :class="social.iconClass" alt="Vite logo" />
-          </span>
-        </p>
-    </div>
-
+      </div>
+      <div class="menu-container">
+        <div @click="scrollToSection('educacion')" :class="{ 'active': activeItem === 'educacion' }">
+          <h3>Educacion <i class="fa-solid fa-up-right-from-square"></i></h3> 
+        </div>
+        <div @click="scrollToSection('cursos')" :class="{ 'active': activeItem === 'cursos' }">
+          <h3>Cursos <i class="fa-solid fa-up-right-from-square"></i></h3>
+        </div>
+        <div @click="scrollToSection('portafolio')" :class="{ 'active': activeItem === 'portafolio' }">
+          <h3>Portafolio <i class="fa-solid fa-up-right-from-square"></i></h3>
+        </div>
+        <div>
+          <h3 class="login-button">Login <i class="fa-solid fa-arrow-right-to-bracket"></i></h3>
+        </div>
+        <div>
+          <h3 class="login-button">Sitio Web <i class="fa-solid fa-link"></i></h3>
+        </div>
+        <div>
+          <h3 class="login-button">Descargar CV <i class="fa-solid fa-angles-down"></i></h3>
+        </div>
       </div>
 
-      <div class="icons">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/pt.svg" class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://vuejs.org/" target="_blank">
-          <img src="/es.svg" class="logo vue" alt="Vue logo" />
-        </a>
-        <a href="https://less.org/" target="_blank">
-          <img src="/us.svg" class="logo vue" alt="Less logo" />
-        </a>
+      <div class="iconos">
+        <span v-for="(social, index) in socialMedia" :key="index" >
+        <i :class="social.iconClass" alt="Vite logo" />
+        </span>
       </div>
     </div>
+    
 
     <div class="right-section">
-      <div class="education-container">
+      <div class="education-container" id="educacion">
         <h3>Educación</h3>
-        <div class="divider"></div>
-        <ul class="no-bullets">
-          <li v-for="(edu, index) in education" :key="index">
+          <div v-for="(edu, index) in education" :key="index" class="item-course">
+          <div class="title">
             <img
               src="https://yt3.googleusercontent.com/rwU607PYF9jK9QL2I85SdfCLVZJGGsxWukuF_LxD0PepnqEIrFVg3W85FOVPDmWdMN1SxyJ7Xi8=s900-c-k-c0x00ffffff-no-rj"
               alt="Icon"
@@ -160,24 +189,35 @@ const portfolio = ref([
             />
             <strong> {{ edu.degree }}</strong>
             - {{ edu.institution }} ({{ edu.year }})
-          </li>
-          <p>
+            </div>
+          <p class="bg-white">
             Experienced Full Stack Developer with a passion for creating
             efficient and scalable web applications. Proven track record in
             delivering high-quality software solutions from concept to
             deployment.
           </p>
           <a class="art-deco-link pb-nn" :href="edu?.link" target="_blank"
-            >Ver certificado</a
+            >
+            <i class="fa-solid fa-award"></i>
+            Ver certificado</a
           >
-        </ul>
+          <a class="edit-link pb-nn" :href="edu?.link" target="_blank"
+            >
+              <i class="fa-regular fa-pen-to-square"></i>
+            </a
+          >
+          <a class="delete-link pb-nn" :href="edu?.link" target="_blank"
+            >
+              <i class="fa-regular fa-trash-can"></i>
+            </a
+          >
+                    </div>
+
       </div>
 
-      <div class="education-container">
+      <div class="education-container" id="cursos">
         <h3>Cursos</h3>
-        <div class="divider"></div>
-        <ul class="no-bullets">
-          <li v-for="(course, index) in courses" :key="index">
+          <div v-for="(course, index) in courses" :key="index" class="item-course">
             <img
               src="https://yt3.googleusercontent.com/rwU607PYF9jK9QL2I85SdfCLVZJGGsxWukuF_LxD0PepnqEIrFVg3W85FOVPDmWdMN1SxyJ7Xi8=s900-c-k-c0x00ffffff-no-rj"
               alt="Icon"
@@ -186,41 +226,92 @@ const portfolio = ref([
             <strong>{{ course.name }}</strong> - {{ course.institution }} ({{
               course.year
             }})<br />
-            <p>
+          <p class="bg-white">
               Experienced Full Stack Developer with a passion for creating
               efficient and scalable web applications. Proven track record in
               delivering high-quality software solutions from concept to
               deployment.
             </p>
             <a class="art-deco-link pb-nn" :href="courses?.link" target="_blank"
-              >Ver certificado</a
+              >
+<i class="fa-solid fa-award"></i>              Ver certificado</a
             >
-          </li>
-        </ul>
+                      <a class="edit-link pb-nn" :href="edu?.link" target="_blank"
+            >
+              <i class="fa-regular fa-pen-to-square"></i>
+            </a
+          >
+          <a class="delete-link pb-nn" :href="edu?.link" target="_blank"
+            >
+              <i class="fa-regular fa-trash-can"></i>
+            </a
+          >
+          </div>
       </div>
 
-      <div class="education-container">
+      <div class="education-container" id="portafolio">
         <h3>Portafolio</h3>
-        <div class="divider"></div>
-        <ul>
-          <li v-for="(project, index) in portfolio" :key="index">
+          <div v-for="(project, index) in portfolio" :key="index"  class="item-course">
             <strong>{{ project.project }}</strong>
             <p>{{ project.description }} ({{ project.year }})</p>
             <p>
               <a class="art-deco-link" :href="project.link" target="_blank"
                 >Ver proyecto</a
               >
+                <a class="edit-link pb-nn" :href="edu?.link" target="_blank"
+            >
+              <i class="fa-regular fa-pen-to-square"></i>
+            </a
+          >
+          <a class="delete-link pb-nn" :href="edu?.link" target="_blank"
+            >
+              <i class="fa-regular fa-trash-can"></i>
+            </a
+          >
             </p>
-          </li>
-        </ul>
+          </div>
       </div>
     </div>
   </div>
+
 </template>
 
 <style scoped lang="less">
+
+.iconos {
+  display: flex;
+  flex-direction: column; /* Alinea los elementos verticalmente */
+  justify-content: center;
+  align-items: flex-end; /* Alinea los elementos hacia la derecha */
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  z-index: 9999;
+  background-color: #2f4a60;
+  font-size: 25px;
+  padding: 15px;
+  margin-right: 8px;
+  color: white;
+}
+
+.iconos span:hover{
+  color: white;
+  cursor: pointer;
+}
+
+.icono {
+  /* Estilos para cada icono, si es necesario */
+}
+
 .pb-nn {
   margin-bottom: 90px;
+}
+.icon-edit{
+  padding-left: 5px;
+}
+.icon-remove{
+  padding-left: 5px;
 }
 .icon-a {
   font-size: 25px;
@@ -230,23 +321,35 @@ const portfolio = ref([
   text-align: center;
 }
 .education-container {
-  background-color: white;
   padding: 5px 25px;
-  border: 1px solid #f4f2ee;
-  margin: 5px;
+  margin: 0px 10px;
   border-radius: 8px;
+  color: #2f4a60;
 }
 .profile-container {
-  padding: 10px;
+  padding: 5px 25px;
+  margin: 0px 10px;
+
+}
+.each-item{
+    //background-color: white;
+      display: inline;
 }
 .no-bullets {
-  list-style: none; /* Quita los puntos de la lista */
+  list-style: square; /* Puedes cambiar a 'circle' o 'square' según tu preferencia */
+  list-style-size: 200px; /* Ajusta el tamaño según tus necesidades */
+  list-style-position: outside;
+
+}
+
+li::marker 
+{
+    font-size: 2em;
+    color: #03bb7f;
+    
 }
 
 /* Agrega un poco de margen inferior para separar los elementos de la lista */
-.no-bullets li {
-  margin-bottom: 8px;
-}
 .list-icon {
   width: 30px; /* Ajusta el tamaño del icono según sea necesario */
   height: 30px; /* Ajusta el tamaño del icono según sea necesario */
@@ -276,6 +379,28 @@ const portfolio = ref([
 
 .banner-container{
   background-color: #00BB7F;
+  margin-bottom: 10px;
+}
+
+.item-course{
+  padding: 20px 0px 20px 0px;
+  flex-direction: column;
+    justify-content: space-between;
+}
+
+.bg-white{
+  //background-color: white;
+  padding: 0px 0px;
+      margin-top: 10px;
+}
+
+.login-button{
+  background-color: #03bb7f;
+  color: white;
+}
+
+.login-button:hover{
+text-shadow: -2px 2px 0px rgba(47,74,96,1);
 }
 
 .profile-image {
@@ -290,7 +415,6 @@ const portfolio = ref([
 }
 
 .left-section {
-  flex: 0.5;
   min-width: 200px; /* Ajusta según sea necesario */
   text-align: left;
   position: sticky;
@@ -330,9 +454,34 @@ const portfolio = ref([
 }
 
 .social-text{
-    font-size: 30px;
+  text-align: center;
+    font-size: 35px;
+    color: #2f4a60;
+}
+.social-icon{
+      padding: 0px 5px;
 }
 
+.banner-item{
+  padding: 5px 0px;
+  //text-transform: uppercase;
+  cursor: pointer;
+      color: #2f4a60;
+        font-weight: 900;
+  text-align: left;
+}
+
+h3{
+  background-color: #2f4a60; /* Cambia el color de fondo según tus preferencias */
+      display: inline;
+      color: white;
+      padding: 6px 10px;
+      cursor: pointer;
+}
+
+.menu-container div{
+  margin-top: 6px;
+}
 
 .social-text span{
   padding-left: 2px;
@@ -356,14 +505,31 @@ const portfolio = ref([
     min-width: 100%;
   }
 
+    .banner-container{
+    margin: 0px 30px;
+    display: none;
+  }
+  .menu-container{
+    text-align: center;
+    display: none;
+  }
+
   .divider {
     display: none; /* Oculta los divisores en pantallas más pequeñas */
   }
 }
 
 @media screen and (max-width: 480px) {
-  .right-section {
-    order: -1;
+  .iconos{
+    font-size: 20px;
+    padding: 8px;
+    color: white;
+    background-color: #2f4a60;
+    margin-right: 0px;
+  }
+  
+  .education-container{
+    padding: 0px;
   }
 
   .social-media-list {
@@ -379,16 +545,45 @@ const portfolio = ref([
 
 .art-deco-link {
   text-decoration: none;
-  color: #404040; /* Color del texto y del borde */
-  border-radius: 10%;
+  color: #2f4a60; /* Color del texto y del borde */
   padding: 5px 10px; /* Ajusta el relleno según sea necesario */
-  border: 1px solid #404040; /* Añade el borde al botón */
-  border-radius: 14px; /* Añade esquinas redondeadas al botón */
+  border: 1px solid #2f4a60; /* Añade el borde al botón */
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .art-deco-link:hover {
-  background-color: #404040; /* Cambia el color de fondo en el hover */
+  background-color: #03bb7f; /* Cambia el color de fondo en el hover */
+    border: 1px solid #2f4a60; /* Añade el borde al botón */
+  color: #ffffff; /* Cambia el color del texto en el hover */
+}
+
+.delete-link {
+  text-decoration: none;
+  color: #2f4a60; /* Color del texto y del borde */
+  padding: 5px 10px; /* Ajusta el relleno según sea necesario */
+  border: 1px solid #2f4a60; /* Añade el borde al botón */
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    margin-left: 5px;
+}
+
+.delete-link:hover {
+  background-color: #03bb7f; /* Cambia el color de fondo en el hover */
+    border: 1px solid #2f4a60; /* Añade el borde al botón */
+  color: #ffffff; /* Cambia el color del texto en el hover */
+}
+
+.edit-link {
+  text-decoration: none;
+  color: #2f4a60; /* Color del texto y del borde */
+  padding: 5px 10px; /* Ajusta el relleno según sea necesario */
+  border: 1px solid #2f4a60; /* Añade el borde al botón */
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  margin-left: 5px;
+}
+
+.edit:hover {
+  background-color: #03bb7f; /* Cambia el color de fondo en el hover */
+    border: 1px solid #2f4a60; /* Añade el borde al botón */
   color: #ffffff; /* Cambia el color del texto en el hover */
 }
 </style>

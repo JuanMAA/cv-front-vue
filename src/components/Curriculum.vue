@@ -2,10 +2,10 @@
 import { ref } from 'vue';
 
 const domain = ref('gabbo.cl');
-const name = ref('J. Mansilla (Gabbo)');
+const name = ref('Juan Gabriel Mansilla');
 const profession = ref('Full Stack Developer');
 const resume = ref(
-  'Experienced Full Stack Developer with a passion for creating efficient and scalable web applications. Proven track record in delivering high-quality software solutions from concept to deployment.'
+  'Soy un apasionado desarrollador Full Stack especializado en Vue.js, JavaScript, Node.js y Express.js.'
 );
 
 const contact = ref([
@@ -120,34 +120,34 @@ const portfolio = ref([
 <template>
   <div class="container">
     <div class="left-section">
-      <div class="profile-container">
-        <div class="text-center">
-          <img
-            src="https://media.licdn.com/dms/image/D4D35AQEHisSerN3uUg/profile-framedphoto-shrink_400_400/0/1696025767262?e=1702083600&v=beta&t=syo7doRR0CW1ewQwmNpOZ5MJPFpKDRHD1sov1KCu05M"
-            alt="Profile Image"
-            class="profile-image"
-          />
-          <h3>{{ name }}</h3>
-        </div>
-        <div class="divider"></div>
-        <p v-for="(contactItem, index) in contact" :key="index">
-          {{ contactItem.value }}
+      <div class="text-center banner-container" >
+        <img  src="/gabbo.svg" class="logo-image" alt="Vite logo" />
+    <div class="logo-description">
+        <p class="title-text">{{ name }}</p>
+        <p class="description-text">{{ resume }}</p>
+        <p class="social-text">
+          <span v-for="(social, index) in socialMedia" :key="index">
+            <i :class="social.iconClass" alt="Vite logo" />
+          </span>
         </p>
-        <a
-          class="art-deco-link"
-          href="https://www.linkedin.com/in/gabbodev/"
-          target="_blank"
-          >Ver perfil en linkedin</a
-        >
+    </div>
+
+      </div>
+
+      <div class="icons">
+        <a href="https://vitejs.dev" target="_blank">
+          <img src="/pt.svg" class="logo" alt="Vite logo" />
+        </a>
+        <a href="https://vuejs.org/" target="_blank">
+          <img src="/es.svg" class="logo vue" alt="Vue logo" />
+        </a>
+        <a href="https://less.org/" target="_blank">
+          <img src="/us.svg" class="logo vue" alt="Less logo" />
+        </a>
       </div>
     </div>
 
     <div class="right-section">
-      <div class="education-container">
-        <h3>{{ profession }}</h3>
-        <p>{{ resume }}</p>
-      </div>
-
       <div class="education-container">
         <h3>Educación</h3>
         <div class="divider"></div>
@@ -214,17 +214,6 @@ const portfolio = ref([
           </li>
         </ul>
       </div>
-      <div class="icons">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://vuejs.org/" target="_blank">
-          <img src="../assets/vue.svg" class="logo vue" alt="Vue logo" />
-        </a>
-        <a href="https://less.org/" target="_blank">
-          <img src="../assets/less.svg" class="logo vue" alt="Less logo" />
-        </a>
-      </div>
     </div>
   </div>
 </template>
@@ -248,12 +237,7 @@ const portfolio = ref([
   border-radius: 8px;
 }
 .profile-container {
-  background-color: white;
-  padding: 5px 25px;
-  border: 1px solid #f4f2ee;
-  margin: 5px;
-  border-radius: 8px;
-  padding-top; -130px;
+  padding: 10px;
 }
 .no-bullets {
   list-style: none; /* Quita los puntos de la lista */
@@ -290,19 +274,68 @@ const portfolio = ref([
   flex-wrap: wrap;
 }
 
+.banner-container{
+  background-color: #00BB7F;
+}
+
 .profile-image {
-  text-align: center;
-  max-width: 100%; /* La imagen se ajustará al 100% del ancho del contenedor */
-  height: auto;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-  border: 5px solid #35495e;
+}
+
+.logo-image {
+  width: 100%;
+  height: 100%;
 }
 
 .left-section {
   flex: 0.5;
   min-width: 200px; /* Ajusta según sea necesario */
   text-align: left;
-  padding-top: 130px;
+  position: sticky;
+  top: 0;
+  height: fit-content; /* Ajusta según sea necesario */
+}
+
+.logo-description{
+  padding: 25px;
+  font-size: 18px;
+  color: white;
+    font-weight: bold;
+    text-align: left;
+      background-color: #2f4a60; /* Cambia el color de fondo según tus preferencias */
+
+}
+
+.description-text{
+  font-size: 14px;
+  //text-transform: uppercase;
+    font-family:'MontBlanc-Trial-Bold';
+        text-align: left;
+}
+
+.title-text{
+  font-size: 17px;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-family:'MontBlanc-Trial-Bold';
+  
+}
+
+.profession-text{
+  font-size: 15px;
+  text-transform: uppercase;
+  font-family:'MontBlanc-Trial-Bold';
+}
+
+.social-text{
+    font-size: 30px;
+}
+
+
+.social-text span{
+  padding-left: 2px;
 }
 
 .right-section {

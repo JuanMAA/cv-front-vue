@@ -88,14 +88,14 @@ const courses = ref([
 
 const portfolio = ref([
   {
-    project: 'Curriculum con Vue.js 3',
+    project: 'Proyecto RESTful con Vue.js',
     description:
       'Experienced Full Stack Developer with a passion for creating efficient and scalable web applications. Proven track record in delivering high-quality software solutions from concept to deployment.',
     year: '2024',
     link: 'https://ejemplo.com/proyecto1',
   },
   {
-    project: 'Curriculum con Nuxt.js 3',
+    project: 'Proyecto RESTful con Nuxt.js',
     description:
       'Experienced Full Stack Developer with a passion for creating efficient and scalable web applications. Proven track record in delivering high-quality software solutions from concept to deployment.',
     year: '2024',
@@ -170,8 +170,11 @@ onBeforeUnmount(() => {
       </div>
 
       <div class="iconos">
-        <span v-for="(social, index) in socialMedia" :key="index" >
+        <span class="icono" v-for="(social, index) in socialMedia" :key="index" >
         <i :class="social.iconClass" alt="Vite logo" />
+        </span>
+        <span >
+          <i class="fa-solid fa-moon"></i>
         </span>
       </div>
     </div>
@@ -252,23 +255,34 @@ onBeforeUnmount(() => {
       <div class="education-container" id="portafolio">
         <h3>Portafolio</h3>
           <div v-for="(project, index) in portfolio" :key="index"  class="item-course">
+                      <img
+              src="https://yt3.googleusercontent.com/rwU607PYF9jK9QL2I85SdfCLVZJGGsxWukuF_LxD0PepnqEIrFVg3W85FOVPDmWdMN1SxyJ7Xi8=s900-c-k-c0x00ffffff-no-rj"
+              alt="Icon"
+              class="list-icon"
+            />
             <strong>{{ project.project }}</strong>
-            <p>{{ project.description }} ({{ project.year }})</p>
-            <p>
-              <a class="art-deco-link" :href="project.link" target="_blank"
-                >Ver proyecto</a
+                      <p class="bg-white">
+              {{ project.description }} ({{ project.year }})</p>
+                            <a class="art-deco-link" :href="project.link" target="_blank"
+                >              <i class="fa-solid fa-link"></i>
+ Ver proyecto</a
               >
+            <a class="delete-link pb-nn" :href="edu?.link" target="_blank"
+            >
+              <i class="fa-brands fa-github"></i>
+            </a
+          >
                 <a class="edit-link pb-nn" :href="edu?.link" target="_blank"
             >
               <i class="fa-regular fa-pen-to-square"></i>
             </a
           >
+
           <a class="delete-link pb-nn" :href="edu?.link" target="_blank"
             >
               <i class="fa-regular fa-trash-can"></i>
             </a
           >
-            </p>
           </div>
       </div>
     </div>
@@ -277,6 +291,16 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped lang="less">
+
+.icono {
+  background-color: #2f4a60;
+  padding: 5px 15px;
+}
+
+.icono i{
+  width: 30px;
+  height: 30px;
+}
 
 .iconos {
   display: flex;
@@ -288,10 +312,7 @@ onBeforeUnmount(() => {
   transform: translateY(-50%);
   right: 0;
   z-index: 9999;
-  background-color: #2f4a60;
   font-size: 25px;
-  padding: 15px;
-  margin-right: 8px;
   color: white;
 }
 
@@ -322,6 +343,7 @@ onBeforeUnmount(() => {
 }
 .education-container {
   padding: 5px 25px;
+  padding-bottom: 30px;
   margin: 0px 10px;
   border-radius: 8px;
   color: #2f4a60;
@@ -383,7 +405,7 @@ li::marker
 }
 
 .item-course{
-  padding: 20px 0px 20px 0px;
+  padding: 25px 0px 0px 0px;
   flex-direction: column;
     justify-content: space-between;
 }

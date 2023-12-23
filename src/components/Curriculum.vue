@@ -1,12 +1,171 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
 
-const domain = ref('gabbo.cl');
+const domain = ref('gabbo.cl'); 
 const name = ref('Juan Gabriel Mansilla');
+const darkMode = ref(true);
 const profession = ref('Full Stack Developer');
 const resume = ref(
   'Desarrollador Full Stack especializado en Vue.js, JavaScript, Node.js y Express.js.'
 );
+
+ const selectedOption = ref({
+    name: 'Full-Stack',
+    primaryColor: '#2f4a60',
+    backgroundColor: '#14181b',
+    textColor: '#2f4a60'
+  });
+
+const selectedTheme = ref('fs');
+
+watch(selectedTheme, (newTheme, oldTheme) => {
+    selectedOption.value = {
+    name: 'Full-Stack',
+    primaryColor: '#2f4a60',
+    backgroundColor: '#1e6fb5',
+    textColor: '#2f4a60'
+  };
+});
+
+
+    const toggleDarkMode = () => {
+      darkMode.value = !darkMode.value;
+    };
+
+const tags = ref([
+  {
+    name: 'Nest.js',
+    primaryColor: '#0e0e10',
+    backgroundColor: '#ea2845',
+    textColor: '#2f4a60',
+    categories: ['bd', 'fs']
+  },
+  {
+    name: 'FlutterFlow',
+    primaryColor: '#14181b',
+    backgroundColor: '#5141f0',
+    textColor: '#2f4a60',
+    categories: ['nc']
+  },
+  {
+    name: 'Notion',
+    primaryColor: '#2e2c2a',
+    backgroundColor: '#606060',
+    textColor: '#2f4a60',
+    secondaryTextColor: '#f3f3f7',
+    categories: ['nc']
+  },
+  {
+    name: 'Retool',
+    primaryColor: '#2e2c2a',
+    backgroundColor: '#606060',
+    textColor: '#2f4a60',
+    secondaryTextColor: '#f3f3f7',
+    categories: ['nc']
+  },
+  {
+    name: 'MySql',
+    primaryColor: '#01618a',
+    backgroundColor: '#e48e01',
+    textColor: '#2f4a60',
+    categories: ['bd']
+  },
+  {
+    name: 'Vue.js',
+    primaryColor: '#2f4a60',
+    backgroundColor: '#03bb7f',
+    textColor: '#2f4a60',
+    icon: 'fa-brands fa-vuejs',
+    categories: ['fd', 'fs']
+  },
+  {
+    name: 'MongoDB',
+    primaryColor: '#082532',
+    backgroundColor: '#449744',
+    textColor: '#2f4a60',
+    categories: ['bd', 'fs']
+  },
+  {
+    name: 'PostgreSQL',
+    primaryColor: '#000000',
+    backgroundColor: '#306793',
+    textColor: '#2f4a60',
+    categories: ['bd', 'fs']
+  },
+  {
+    name: 'Node.js',
+    primaryColor: '#666861',
+    backgroundColor: '#8cc502',
+    textColor: '#2f4a60',
+    icon: 'fa-brands fa-node',
+    categories: ['bd', 'fs']
+  },
+  {
+    name: 'JS',
+    primaryColor: '#2f2f2c',
+    backgroundColor: '#d6c000',
+    textColor: '#2f4a60',
+    icon: 'fa-brands fa-js',
+    categories: ['bd', 'fd', 'fs']
+  },
+  {
+    name: 'TS',
+    primaryColor: '#000000',
+    backgroundColor: '#137ece',
+    textColor: '#2f4a60',
+    icon: 'fa-brands fa-ts',
+    categories: ['bd', 'fd', 'fs']
+  },
+  {
+    name: 'Angular.js',
+    primaryColor: '#303030',
+    backgroundColor: '#c3012f',
+    secondaryTextColor: '#f3f3f7',
+    textColor: '#2f4a60',
+    icon: 'fa-brands fa-angular',
+    categories: ['fd', 'fs']
+  },
+  {
+    name: 'PHP',
+    primaryColor: '#1e222e',
+    backgroundColor: '#7a86b8',
+    textColor: '#2f4a60',
+    icon: 'fa-brands fa-php',
+    categories: ['bd', 'fd', 'fs']
+  },
+  {
+    name: 'Java',
+    primaryColor: '#2e6eb9',
+    backgroundColor: '#f89a16',
+    textColor: '#2f4a60',
+    icon: 'fa-brands fa-java',
+    categories: ['bd', 'fs']
+  },
+  {
+    name: 'React',
+    primaryColor: '#23272f',
+    backgroundColor: '#149eca',
+    textColor: '#2f4a60',
+    icon: 'fa-brands fa-react',
+    categories: ['fd', 'fs']
+  },
+  {
+    name: 'Next.js',
+    primaryColor: '#000000',
+    backgroundColor: '#888888',
+    textColor: '#2f4a60',
+    icon: 'fa-brands fa-next',
+    categories: ['fd', 'fs']
+  },
+  {
+    name: 'Wordpress',
+    primaryColor: '#4c4c4c',
+    backgroundColor: '#28799e',
+    textColor: '#2f4a60',
+    icon: 'fa-brands fa-wordpress',
+    categories: ['fd', 'nc']
+  }
+]);
 
 const contact = ref([
   {
@@ -39,10 +198,16 @@ const socialMedia = ref([
 const education = ref([
   {
     institution: 'Platzi',
+    degree: 'Técnico en Programación y Análisis de Sistemas',
+    year: '2018-2022',
+    icon: 'https://www.curriculumnacional.cl/docente/629/articles-180962_imagen_portada.thumb_iNormal.jpg'
+  },
+  {
+    institution: 'Platzi',
     degree: 'Front-End con Vue',
     year: '2023',
   },
-    {
+  {
     institution: 'Platzi',
     degree: 'Backend con Node.js',
     year: 'En Proceso',
@@ -88,14 +253,21 @@ const courses = ref([
 
 const portfolio = ref([
   {
-    project: 'Proyecto RESTful con Vue.js',
+    project: 'Proyecto Stack MEVN RestFul',
     description:
       'Experienced Full Stack Developer with a passion for creating efficient and scalable web applications. Proven track record in delivering high-quality software solutions from concept to deployment.',
     year: '2024',
     link: 'https://ejemplo.com/proyecto1',
   },
   {
-    project: 'Proyecto RESTful con Nuxt.js',
+    project: 'Proyecto Stack MEAN RestFul',
+    description:
+      'Experienced Full Stack Developer with a passion for creating efficient and scalable web applications. Proven track record in delivering high-quality software solutions from concept to deployment.',
+    year: '2024',
+    link: 'https://ejemplo.com/proyecto1',
+  },
+  {
+    project: 'Proyecto RESTful Nuxt.js',
     description:
       'Experienced Full Stack Developer with a passion for creating efficient and scalable web applications. Proven track record in delivering high-quality software solutions from concept to deployment.',
     year: '2024',
@@ -147,66 +319,89 @@ onBeforeUnmount(() => {
 <template>
   <div class="container">
     <div class="left-section">
-      <div class="text-center banner-container" >
-        <svg id="eAEiltb5zwW1" class="logo-image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><text dx="0" dy="0" font-family="&quot;MontBlanc-Trial-Bold&quot;" font-size="302" font-weight="400" transform="translate(28.6872 248.681)" fill="#2f4a60"><tspan font-family="&quot;MontBlanc-Trial-Bold&quot;" font-size="302" font-weight="400" font-style="normal" transform="translate(28.6872 248.681)" fill="#2f4a60"><![CDATA[
+      <div class="text-center banner-container" :style="{ backgroundColor: selectedOption.backgroundColor }">
+        <svg id="eAEiltb5zwW1" class="logo-image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><text dx="0" dy="0" font-family="&quot;MontBlanc-Trial-Bold&quot;" font-size="302" font-weight="400" transform="translate(28.6872 248.681)" :fill="selectedOption.backgroundColor"><tspan font-family="&quot;MontBlanc-Trial-Bold&quot;" font-size="302" font-weight="400" font-style="normal" transform="translate(28.6872 248.681)" :fill="selectedOption.primaryColor"><![CDATA[
             G
-          ]]></tspan></text><text dx="0" dy="0" font-family="&quot;MontBlanc-Trial-Bold&quot;" font-size="302" font-weight="400" transform="translate(238.687 248.681)" fill="#040622"><tspan font-family="&quot;MontBlanc-Trial-Bold&quot;" font-size="302" font-weight="400" font-style="normal" transform="translate(238.687 248.681)" fill="#2f4a60"><![CDATA[
-          A
-          ]]></tspan></text><text dx="0" dy="0" font-family="&quot;MontBlanc-Trial-Bold&quot;" font-size="302" font-weight="400" transform="translate(26.0487 466.681)" fill="#2f4a60"><![CDATA[
+          ]]></tspan></text><text dx="0" dy="0" font-family="&quot;MontBlanc-Trial-Bold&quot;" font-size="302" font-weight="400" transform="translate(238.687 248.681)" fill="#040622"><tspan font-family="&quot;MontBlanc-Trial-Bold&quot;" font-size="302" font-weight="400" font-style="normal" transform="translate(238.687 248.681)" :fill="selectedOption.primaryColor"><![CDATA[
+          A 
+          ]]></tspan></text><text dx="0" dy="0" font-family="&quot;MontBlanc-Trial-Bold&quot;" font-size="302" font-weight="400" transform="translate(26.0487 466.681)" :fill="selectedOption.primaryColor"><![CDATA[
           B
-          ]]></text><text dx="0" dy="0" font-family="&quot;MontBlanc-Trial-Bold&quot;" font-size="302" font-weight="400" transform="translate(219.049 461.681)" fill="#2f4a60"><tspan font-family="&quot;MontBlanc-Trial-Bold&quot;" font-size="302" font-weight="400" font-style="normal" transform="translate(219.049 461.681)" fill="#2f4a60"><![CDATA[
+          ]]></text><text dx="0" dy="0" font-family="&quot;MontBlanc-Trial-Bold&quot;" font-size="302" font-weight="400" transform="translate(219.049 461.681)" fill="#2f4a60"><tspan font-family="&quot;MontBlanc-Trial-Bold&quot;" font-size="302" font-weight="400" font-style="normal" transform="translate(219.049 461.681)" :fill="selectedOption.primaryColor"><![CDATA[
           O
-          ]]></tspan></text><text id="eAEiltb5zwW9" dx="0" dy="0" font-family="&quot;MontBlanc-Trial-Bold&quot;" font-size="302" font-weight="400" transform="translate(45.908115 445.261719)" fill="#fff"><tspan font-family="&quot;MontBlanc-Trial-Bold&quot;" font-size="302" font-weight="400" font-style="normal" transform="translate(50.9608 445.681)" fill="#fff"><![CDATA[
+          ]]></tspan></text><text id="eAEiltb5zwW9" dx="0" dy="0" font-family="&quot;MontBlanc-Trial-Bold&quot;" font-size="302" font-weight="400" transform="translate(45.908115 445.261719)" :fill="selectedOption?.secondaryTextColor ?? 'white'"><tspan font-family="&quot;MontBlanc-Trial-Bold&quot;" font-size="302" font-weight="400" font-style="normal" transform="translate(50.9608 445.681)" :fill="selectedOption?.secondaryTextColor ?? 'white'"><![CDATA[
           B
           ]]></tspan></text>
         </svg>
       </div>
       <div class="menu-container">
-        <div @click="scrollToSection('educacion')" :class="{ 'active': activeItem === 'educacion' }">
-          <h3>Educacion <i class="fa-solid fa-up-right-from-square"></i></h3> 
+        <div @click="scrollToSection('educacion')" :class="{ 'active': activeItem === 'educacion' }"> 
+          <h3 :style="{ backgroundColor: selectedOption.primaryColor }">Educacion <i class="fa-solid fa-up-right-from-square"></i></h3> 
         </div>
         <div @click="scrollToSection('cursos')" :class="{ 'active': activeItem === 'cursos' }">
-          <h3>Cursos <i class="fa-solid fa-up-right-from-square"></i></h3>
+          <h3 :style="{ backgroundColor: selectedOption.primaryColor }">Cursos <i class="fa-solid fa-up-right-from-square"></i></h3>
         </div>
         <div @click="scrollToSection('portafolio')" :class="{ 'active': activeItem === 'portafolio' }">
-          <h3>Portafolio <i class="fa-solid fa-up-right-from-square"></i></h3>
+          <h3 :style="{ backgroundColor: selectedOption.primaryColor }">Portafolio <i class="fa-solid fa-up-right-from-square"></i></h3>
         </div>
         <div>
-          <h3 class="login-button">Login <i class="fa-solid fa-arrow-right-to-bracket"></i></h3>
+          <h3 :style="{ backgroundColor: selectedOption.backgroundColor }" class="login-button" >Ir a Linkedin <i class="fa-solid fa-link"></i></h3>
         </div>
         <div>
-          <h3 class="login-button">Sitio Web <i class="fa-solid fa-link"></i></h3>
+          <h3 :style="{ backgroundColor: selectedOption.backgroundColor }" class="login-button">Contactame <i class="fa-solid fa-comment"></i></h3>
         </div>
         <div>
-          <h3 class="login-button">Descargar CV <i class="fa-solid fa-angles-down"></i></h3>
+          <h3 :style="{ backgroundColor: selectedOption.backgroundColor }" class="login-button">Descargar CV <i class="fa-solid fa-angles-down"></i></h3>
+        </div>
+        <div>
+          <h3 :style="{ backgroundColor: selectedOption.backgroundColor }" @click="toggleDarkMode" class="login-button">
+            {{ darkMode ? 'Modo Oscuro' : 'Ligth Mode' }} <i :class="darkMode ? 'fa-solid fa-toggle-off' : 'fa-solid fa-toggle-on'"></i>
+          </h3>
         </div>
       </div>
 
-      <div class="iconos">
-        <span class="icono" v-for="(social, index) in socialMedia" :key="index" >
-        <i :class="social.iconClass" alt="Vite logo" />
-        </span>
-        <span >
-          <i class="fa-solid fa-moon"></i>
-        </span>
-      </div>
     </div>
     
 
     <div class="right-section">
-      <div class="education-container" id="educacion">
-        <h3>Educación</h3>
-          <div v-for="(edu, index) in education" :key="index" class="item-course">
+
+      <div class="education-container" id="sss">
+        !Hola, soy <b :style="{ 
+              color: selectedOption.primaryColor
+            }" >Juan (Gabbbo) Mansilla</b> y soy 
+        <select name="lenguajes" id="lang" v-model="selectedTheme" class="select" :style="{ 
+              backgroundColor: selectedOption.backgroundColor ?? 'white',
+              color: white
+            }" > 
+          <option value="fs">Full-Stack Developer</option>
+          <option value="bd">Backend Developer</option>
+          <option value="fd">Front-End Developer</option>
+          <option value="nc">No-Code Developer</option>
+        </select> 
+        con experiencia en:
+          <label v-for="option in tags" :key="option.name" class="radio-button" 
+            v-show="option.categories.includes(selectedTheme)"
+            :style="{ 
+              backgroundColor: selectedOption.name == option.name ? selectedOption.backgroundColor : 'white',
+              color: selectedOption.name == option.name ? 'white' : selectedOption.primaryColor
+            }">
+            <input type="radio" v-model="selectedOption" :value="option" />
+             <i :class="option?.icon"></i> {{ option.name }}
+          </label>
+      </div>
+
+      <div class="education-container" id="educacion" >
+        <h3 :style="{ backgroundColor: selectedOption.backgroundColor }">Educación</h3>
+          <div v-for="(edu, index) in education" :key="index" class="item-course"  :style="{ color: selectedOption.primaryColor }">
           <div class="title">
             <img
-              src="https://yt3.googleusercontent.com/rwU607PYF9jK9QL2I85SdfCLVZJGGsxWukuF_LxD0PepnqEIrFVg3W85FOVPDmWdMN1SxyJ7Xi8=s900-c-k-c0x00ffffff-no-rj"
+              :src="edu.icon ?? 'https://www.curriculumnacional.cl/estudiante/621/articles-180962_imagen_portada.thumb_iNormal.jpg'"
               alt="Icon"
               class="list-icon"
             />
             <strong> {{ edu.degree }}</strong>
             - {{ edu.institution }} ({{ edu.year }})
             </div>
-          <p class="bg-white">
+          <p class="bg-white" hidden>
             Experienced Full Stack Developer with a passion for creating
             efficient and scalable web applications. Proven track record in
             delivering high-quality software solutions from concept to
@@ -232,8 +427,8 @@ onBeforeUnmount(() => {
       </div>
 
       <div class="education-container" id="cursos">
-        <h3>Cursos</h3>
-          <div v-for="(course, index) in courses" :key="index" class="item-course">
+        <h3 :style="{ backgroundColor: selectedOption.backgroundColor }">Cursos</h3>
+          <div v-for="(course, index) in courses" :key="index" class="item-course" :style="{ color: selectedOption.primaryColor }">
             <img
               src="https://yt3.googleusercontent.com/rwU607PYF9jK9QL2I85SdfCLVZJGGsxWukuF_LxD0PepnqEIrFVg3W85FOVPDmWdMN1SxyJ7Xi8=s900-c-k-c0x00ffffff-no-rj"
               alt="Icon"
@@ -413,7 +608,7 @@ li::marker
 }
 
 .banner-container{
-  background-color: #00BB7F;
+  //background-color: #00BB7F;
   margin-bottom: 10px;
 }
 
@@ -512,6 +707,18 @@ h3{
       color: white;
       padding: 6px 10px;
       cursor: pointer;
+}
+
+.tag{
+  background-color: #2f4a60; /* Cambia el color de fondo según tus preferencias */
+        display: inline;
+
+      color: white;
+      padding: 6px 10px;
+      cursor: pointer;
+      padding-left: 5px;
+      padding-right: 5px;
+      margin-right: 3px;
 }
 
 .menu-container div{
@@ -620,5 +827,50 @@ h3{
   background-color: #03bb7f; /* Cambia el color de fondo en el hover */
     border: 1px solid #2f4a60; /* Añade el borde al botón */
   color: #ffffff; /* Cambia el color del texto en el hover */
+}
+
+.select {
+  display: inline-block;
+  margin: 3px 3px;
+  padding: 9px 8px;
+  text-align: center;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+select {
+  -webkit-appearance: none;  /* Safari y Chrome */
+  -moz-appearance: none;     /* Firefox */
+  appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+}
+
+/* Estilo adicional para Firefox */
+select::-ms-expand {
+  display: none;
+}
+
+.radio-button {
+  display: inline-block;
+  margin-right: 5px;
+  margin-top: 5px;
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.radio-button input {
+  display: none;
+}
+
+.radio-button input:checked + span {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.radio-button:hover {
+  background-color: #f0f0f0;
 }
 </style>

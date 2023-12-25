@@ -164,6 +164,41 @@ const tags = ref([
     textColor: '#2f4a60',
     icon: 'fa-brands fa-wordpress',
     categories: ['fd', 'nc']
+  },
+  {
+    name: 'Community Manager',
+    primaryColor: '#4c4c4c',
+    backgroundColor: '#54bb56',
+    textColor: '#2f4a60',
+    categories: ['cc']
+  },
+  {
+    name: 'Video Maker',
+    primaryColor: '#4c4c4c',
+    backgroundColor: '#54bb56',
+    textColor: '#2f4a60',
+    categories: ['cc']
+  },
+  {
+    name: 'Photography Enthusiast',
+    primaryColor: '#4c4c4c',
+    backgroundColor: '#54bb56',
+    textColor: '#2f4a60',
+    categories: ['cc']
+  },
+  {
+    name: 'Personal Branding Consultant',
+    primaryColor: '#4c4c4c',
+    backgroundColor: '#54bb56',
+    textColor: '#2f4a60',
+    categories: ['cc']
+  },
+  {
+    name: 'Web Accessibility Consultant',
+    primaryColor: '#4c4c4c',
+    backgroundColor: '#54bb56',
+    textColor: '#2f4a60',
+    categories: ['cc']
   }
 ]);
 
@@ -201,14 +236,16 @@ const education = ref([
     degree: 'Ingeniería en Informática mención Desarrollo de Sistemas',
     year: '2018-2022',
     description: 'Realizar y proponer soluciones integrales para el desarrollo de sistemas, incorporando análisis, metodologías, pruebas e implementación de dichas soluciones. Puede, además, formular, evaluar y gestionar proyectos informáticos de toda índole.',
-    icon: 'https://www.curriculumnacional.cl/docente/629/articles-180962_imagen_portada.thumb_iNormal.jpg'
+    icon: 'https://www.curriculumnacional.cl/docente/629/articles-180962_imagen_portada.thumb_iNormal.jpg',
+    categories: ['fd', 'fs', 'bd']
   },
   {
     institution: 'Platzi',
     degree: 'Front-End con Vue',
     year: '2023',
     description: 'funcionamiento más básico hasta su uso como framework implementando diversas librerías.',
-    icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMq4odFRbUxvuSxp1owv99ybwwEcm1UX9eI6-LVQ-GZg9sTalt33zGrnWjbV2ouI7Wg18&usqp=CAU'
+    icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMq4odFRbUxvuSxp1owv99ybwwEcm1UX9eI6-LVQ-GZg9sTalt33zGrnWjbV2ouI7Wg18&usqp=CAU',
+    categories: ['Vue.js']
   }
 ]);
 
@@ -394,6 +431,7 @@ onBeforeUnmount(() => {
           <option value="bd">Backend Developer</option>
           <option value="fd">Front-End Developer</option>
           <option value="nc">No-Code Developer</option>
+          <option value="cc">Digital Creator</option>
         </select> 
         con experiencia en:
           <label v-for="option in tags" :key="option.name" class="radio-button" 
@@ -412,7 +450,8 @@ onBeforeUnmount(() => {
 
       <div class="education-container" id="educacion" >
         <h3 :style="{ backgroundColor: selectedOption.backgroundColor }">Educación</h3>
-          <div v-for="(edu, index) in education" :key="index" class="item-course"  :style="{ color: selectedOption.primaryColor }">
+          <div v-for="(edu, index) in education" :key="index" class="item-course"  :style="{ color: selectedOption.primaryColor }"
+               v-show="edu?.categories.includes(selectedTheme) || edu?.categories.includes(selectedOption?.name)">
           <div class="title">
             <img
               :src="edu.icon"
@@ -436,23 +475,34 @@ onBeforeUnmount(() => {
       <div class="education-container" id="portafolio">
         <h3 :style="{ backgroundColor: selectedOption.backgroundColor }">Portafolio</h3>
           <div v-for="(project, index) in portfolio" :key="index"  class="item-course">
-                      <img
+            <img
               src="https://yt3.googleusercontent.com/rwU607PYF9jK9QL2I85SdfCLVZJGGsxWukuF_LxD0PepnqEIrFVg3W85FOVPDmWdMN1SxyJ7Xi8=s900-c-k-c0x00ffffff-no-rj"
               alt="Icon"
               class="list-icon"
             />
             <strong>{{ project.project }}</strong>
-                      <p class="bg-white">
-              {{ project.description }} ({{ project.year }})</p>
-              <a class="art-deco-link" :href="project.link" target="_blank"
-                >              <i class="fa-solid fa-link"></i>
-              Ver proyecto</a
-              >
-            <a class="art-deco-link" :href="edu?.link" target="_blank"
-            >
+              <p class="bg-white">
+                {{ project.description }} ({{ project.year }})
+              </p>
+
+              <div>
+              <label v-for="option in tags" :key="option.name" class="radio-button" 
+                        v-show="option.categories.includes(selectedTheme)"
+                        :style="{ 
+              backgroundColor: selectedOption.name == option.name ? selectedOption.backgroundColor : 'white',
+              color: selectedOption.name == option.name ? 'white' : selectedOption.primaryColor
+            }">
+            <input type="radio" v-model="selectedOption" :value="option" />
+             <i :class="option?.icon"></i> {{ option.name }}
+           </label> 
+           </div>
+              
+              <a class="art-deco-link" :href="project.link" target="_blank">              
+              <i class="fa-solid fa-link"></i> Ver proyecto
+            </a>
+            <a class="art-deco-link" :href="edu?.link" target="_blank">
               <i class="fa-brands fa-github"></i>
-            </a
-          >
+            </a>
           </div>
       </div>
     </div>

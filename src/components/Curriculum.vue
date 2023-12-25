@@ -12,7 +12,7 @@ const resume = ref(
  const selectedOption = ref({
     name: 'Full-Stack',
     primaryColor: '#2f4a60',
-    backgroundColor: '#14181b',
+    backgroundColor: '#ff7a00',
     textColor: '#2f4a60'
   });
 
@@ -22,7 +22,7 @@ watch(selectedTheme, (newTheme, oldTheme) => {
     selectedOption.value = {
     name: 'Full-Stack',
     primaryColor: '#2f4a60',
-    backgroundColor: '#1e6fb5',
+    backgroundColor: '#ff7a00',
     textColor: '#2f4a60'
   };
 });
@@ -197,21 +197,36 @@ const socialMedia = ref([
 ]);
 const education = ref([
   {
-    institution: 'Platzi',
-    degree: 'Técnico en Programación y Análisis de Sistemas',
+    institution: 'AIEP',
+    degree: 'Ingeniería en Informática mención Desarrollo de Sistemas',
     year: '2018-2022',
+    description: 'Realizar y proponer soluciones integrales para el desarrollo de sistemas, incorporando análisis, metodologías, pruebas e implementación de dichas soluciones. Puede, además, formular, evaluar y gestionar proyectos informáticos de toda índole.',
     icon: 'https://www.curriculumnacional.cl/docente/629/articles-180962_imagen_portada.thumb_iNormal.jpg'
   },
   {
     institution: 'Platzi',
     degree: 'Front-End con Vue',
     year: '2023',
+    description: 'funcionamiento más básico hasta su uso como framework implementando diversas librerías.',
+    icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMq4odFRbUxvuSxp1owv99ybwwEcm1UX9eI6-LVQ-GZg9sTalt33zGrnWjbV2ouI7Wg18&usqp=CAU'
+  }
+]);
+
+const work = ref([
+  {
+    institution: 'AIEP',
+    degree: 'Ingeniería en Informática mención Desarrollo de Sistemas',
+    year: '2018-2022',
+    description: 'Realizar y proponer soluciones integrales para el desarrollo de sistemas, incorporando análisis, metodologías, pruebas e implementación de dichas soluciones. Puede, además, formular, evaluar y gestionar proyectos informáticos de toda índole.',
+    icon: 'https://www.curriculumnacional.cl/docente/629/articles-180962_imagen_portada.thumb_iNormal.jpg'
   },
   {
     institution: 'Platzi',
-    degree: 'Backend con Node.js',
-    year: 'En Proceso',
-  },
+    degree: 'Front-End con Vue',
+    year: '2023',
+    description: 'funcionamiento más básico hasta su uso como framework implementando diversas librerías.',
+    icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMq4odFRbUxvuSxp1owv99ybwwEcm1UX9eI6-LVQ-GZg9sTalt33zGrnWjbV2ouI7Wg18&usqp=CAU'
+  }
 ]);
 
 const experience = ref([
@@ -343,6 +358,9 @@ onBeforeUnmount(() => {
         <div @click="scrollToSection('portafolio')" :class="{ 'active': activeItem === 'portafolio' }">
           <h3 :style="{ backgroundColor: selectedOption.primaryColor }">Portafolio <i class="fa-solid fa-up-right-from-square"></i></h3>
         </div>
+        <div @click="scrollToSection('portafolio')" :class="{ 'active': activeItem === 'portafolio' }">
+          <h3 :style="{ backgroundColor: selectedOption.primaryColor }">Experiencia <i class="fa-solid fa-up-right-from-square"></i></h3>
+        </div>
         <div>
           <h3 :style="{ backgroundColor: selectedOption.backgroundColor }" class="login-button" >Ir a Linkedin <i class="fa-solid fa-link"></i></h3>
         </div>
@@ -386,7 +404,10 @@ onBeforeUnmount(() => {
             }">
             <input type="radio" v-model="selectedOption" :value="option" />
              <i :class="option?.icon"></i> {{ option.name }}
-          </label>
+          </label> y tal vez también cuento con habilidades en.. <input type="text" class="input-style" :style="{ 
+              color: selectedOption.primaryColor
+            }" placeholder="Ej: websocket, unit test..." />
+
       </div>
 
       <div class="education-container" id="educacion" >
@@ -394,74 +415,26 @@ onBeforeUnmount(() => {
           <div v-for="(edu, index) in education" :key="index" class="item-course"  :style="{ color: selectedOption.primaryColor }">
           <div class="title">
             <img
-              :src="edu.icon ?? 'https://www.curriculumnacional.cl/estudiante/621/articles-180962_imagen_portada.thumb_iNormal.jpg'"
+              :src="edu.icon"
               alt="Icon"
               class="list-icon"
             />
             <strong> {{ edu.degree }}</strong>
             - {{ edu.institution }} ({{ edu.year }})
             </div>
-          <p class="bg-white" hidden>
-            Experienced Full Stack Developer with a passion for creating
-            efficient and scalable web applications. Proven track record in
-            delivering high-quality software solutions from concept to
-            deployment.
+          <p class="bg-white">
+            {{ edu.description }}
           </p>
           <a class="art-deco-link pb-nn" :href="edu?.link" target="_blank"
             >
             <i class="fa-solid fa-award"></i>
             Ver certificado</a
           >
-          <a class="edit-link pb-nn" :href="edu?.link" target="_blank"
-            >
-              <i class="fa-regular fa-pen-to-square"></i>
-            </a
-          >
-          <a class="delete-link pb-nn" :href="edu?.link" target="_blank"
-            >
-              <i class="fa-regular fa-trash-can"></i>
-            </a
-          >
-                    </div>
-
-      </div>
-
-      <div class="education-container" id="cursos">
-        <h3 :style="{ backgroundColor: selectedOption.backgroundColor }">Cursos</h3>
-          <div v-for="(course, index) in courses" :key="index" class="item-course" :style="{ color: selectedOption.primaryColor }">
-            <img
-              src="https://yt3.googleusercontent.com/rwU607PYF9jK9QL2I85SdfCLVZJGGsxWukuF_LxD0PepnqEIrFVg3W85FOVPDmWdMN1SxyJ7Xi8=s900-c-k-c0x00ffffff-no-rj"
-              alt="Icon"
-              class="list-icon"
-            />
-            <strong>{{ course.name }}</strong> - {{ course.institution }} ({{
-              course.year
-            }})<br />
-          <p class="bg-white">
-              Experienced Full Stack Developer with a passion for creating
-              efficient and scalable web applications. Proven track record in
-              delivering high-quality software solutions from concept to
-              deployment.
-            </p>
-            <a class="art-deco-link pb-nn" :href="courses?.link" target="_blank"
-              >
-<i class="fa-solid fa-award"></i>              Ver certificado</a
-            >
-                      <a class="edit-link pb-nn" :href="edu?.link" target="_blank"
-            >
-              <i class="fa-regular fa-pen-to-square"></i>
-            </a
-          >
-          <a class="delete-link pb-nn" :href="edu?.link" target="_blank"
-            >
-              <i class="fa-regular fa-trash-can"></i>
-            </a
-          >
-          </div>
+        </div>
       </div>
 
       <div class="education-container" id="portafolio">
-        <h3>Portafolio</h3>
+        <h3 :style="{ backgroundColor: selectedOption.backgroundColor }">Portafolio</h3>
           <div v-for="(project, index) in portfolio" :key="index"  class="item-course">
                       <img
               src="https://yt3.googleusercontent.com/rwU607PYF9jK9QL2I85SdfCLVZJGGsxWukuF_LxD0PepnqEIrFVg3W85FOVPDmWdMN1SxyJ7Xi8=s900-c-k-c0x00ffffff-no-rj"
@@ -471,24 +444,13 @@ onBeforeUnmount(() => {
             <strong>{{ project.project }}</strong>
                       <p class="bg-white">
               {{ project.description }} ({{ project.year }})</p>
-                            <a class="art-deco-link" :href="project.link" target="_blank"
+              <a class="art-deco-link" :href="project.link" target="_blank"
                 >              <i class="fa-solid fa-link"></i>
- Ver proyecto</a
+              Ver proyecto</a
               >
-            <a class="delete-link pb-nn" :href="edu?.link" target="_blank"
+            <a class="art-deco-link" :href="edu?.link" target="_blank"
             >
               <i class="fa-brands fa-github"></i>
-            </a
-          >
-                <a class="edit-link pb-nn" :href="edu?.link" target="_blank"
-            >
-              <i class="fa-regular fa-pen-to-square"></i>
-            </a
-          >
-
-          <a class="delete-link pb-nn" :href="edu?.link" target="_blank"
-            >
-              <i class="fa-regular fa-trash-can"></i>
             </a
           >
           </div>
@@ -786,17 +748,16 @@ h3{
 }
 
 .art-deco-link {
-  text-decoration: none;
-  color: #2f4a60; /* Color del texto y del borde */
-  padding: 5px 10px; /* Ajusta el relleno según sea necesario */
-  border: 1px solid #2f4a60; /* Añade el borde al botón */
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  margin-top: 5px;
+  background-color: #ffffff;
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  cursor: pointer;
 }
 
 .art-deco-link:hover {
-  background-color: #03bb7f; /* Cambia el color de fondo en el hover */
-    border: 1px solid #2f4a60; /* Añade el borde al botón */
-  color: #ffffff; /* Cambia el color del texto en el hover */
+  background-color: transparent;
+  border: 1px solid #ccc;
 }
 
 .delete-link {
@@ -868,6 +829,16 @@ select::-ms-expand {
 .radio-button input:checked + span {
   background-color: #3498db;
   color: #fff;
+}
+
+.input-style{
+  display: inline-block;
+  margin-top: 5px;
+  padding: 9px 8px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-size: 15px;
+  background-color: white;
 }
 
 .radio-button:hover {

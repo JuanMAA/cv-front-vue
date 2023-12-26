@@ -235,7 +235,6 @@ const education = ref([
     institution: 'AIEP',
     degree: 'Ingeniería en Informática mención Desarrollo de Sistemas',
     year: '2018-2022',
-    description: 'Realizar y proponer soluciones integrales para el desarrollo de sistemas, incorporando análisis, metodologías, pruebas e implementación de dichas soluciones. Puede, además, formular, evaluar y gestionar proyectos informáticos de toda índole.',
     icon: 'https://www.curriculumnacional.cl/docente/629/articles-180962_imagen_portada.thumb_iNormal.jpg',
     categories: ['fd', 'fs', 'bd']
   },
@@ -305,25 +304,28 @@ const courses = ref([
 
 const portfolio = ref([
   {
-    project: 'Proyecto Stack MEVN RestFul',
+    project: 'Youtube - Gabbo',
     description:
       'Experienced Full Stack Developer with a passion for creating efficient and scalable web applications. Proven track record in delivering high-quality software solutions from concept to deployment.',
     year: '2024',
     link: 'https://ejemplo.com/proyecto1',
+    icon: 'https://cdn3.iconfinder.com/data/icons/social-network-30/512/social-06-512.png'
   },
   {
-    project: 'Proyecto Stack MEAN RestFul',
+    project: 'Youtube - Futbol Digital',
     description:
       'Experienced Full Stack Developer with a passion for creating efficient and scalable web applications. Proven track record in delivering high-quality software solutions from concept to deployment.',
     year: '2024',
     link: 'https://ejemplo.com/proyecto1',
+        icon: 'https://cdn3.iconfinder.com/data/icons/social-network-30/512/social-06-512.png'
   },
   {
-    project: 'Proyecto RESTful Nuxt.js',
+    project: 'Adobe Stock - Gabbo',
     description:
       'Experienced Full Stack Developer with a passion for creating efficient and scalable web applications. Proven track record in delivering high-quality software solutions from concept to deployment.',
     year: '2024',
-    link: 'https://ejemplo.com/proyecto2',
+    link: 'https://branditechture.agency/brand-logos/wp-content/uploads/wpdm-cache/Adobe-Stock-900x0.png',
+        icon: 'https://branditechture.agency/brand-logos/wp-content/uploads/wpdm-cache/Adobe-Stock-900x0.png',
   },
   // Agrega más proyectos según sea necesario
 ]);
@@ -476,7 +478,7 @@ onBeforeUnmount(() => {
         <h3 :style="{ backgroundColor: selectedOption.backgroundColor }">Portafolio</h3>
           <div v-for="(project, index) in portfolio" :key="index"  class="item-course">
             <img
-              src="https://yt3.googleusercontent.com/rwU607PYF9jK9QL2I85SdfCLVZJGGsxWukuF_LxD0PepnqEIrFVg3W85FOVPDmWdMN1SxyJ7Xi8=s900-c-k-c0x00ffffff-no-rj"
+              :src="project.icon"
               alt="Icon"
               class="list-icon"
             />
@@ -484,25 +486,25 @@ onBeforeUnmount(() => {
               <p class="bg-white">
                 {{ project.description }} ({{ project.year }})
               </p>
-
               <div>
-              <label v-for="option in tags" :key="option.name" class="radio-button" 
+              <label v-for="option in tags" :key="option.name" class="tags" 
                         v-show="option.categories.includes(selectedTheme)"
                         :style="{ 
               backgroundColor: selectedOption.name == option.name ? selectedOption.backgroundColor : 'white',
               color: selectedOption.name == option.name ? 'white' : selectedOption.primaryColor
             }">
-            <input type="radio" v-model="selectedOption" :value="option" />
-             <i :class="option?.icon"></i> {{ option.name }}
+             {{ option.name }}
            </label> 
            </div>
-              
+                          <div style="padding-top: 20px">
+
               <a class="art-deco-link" :href="project.link" target="_blank">              
               <i class="fa-solid fa-link"></i> Ver proyecto
             </a>
             <a class="art-deco-link" :href="edu?.link" target="_blank">
               <i class="fa-brands fa-github"></i>
             </a>
+                       </div>
           </div>
       </div>
     </div>
@@ -628,6 +630,10 @@ li::marker
   padding: 25px 0px 0px 0px;
   flex-direction: column;
     justify-content: space-between;
+}
+
+.item-portoflio{
+
 }
 
 .bg-white{
@@ -861,6 +867,14 @@ select {
 /* Estilo adicional para Firefox */
 select::-ms-expand {
   display: none;
+}
+
+.tags{
+    display: inline-block;
+  margin-right: 5px;
+  margin-top: 3px;
+  padding: 2px 6px;
+  border: 1px solid #ccc;
 }
 
 .radio-button {

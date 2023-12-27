@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
+import { ref, onMounted, onBeforeUnmount, watch, computed } from 'vue';
 
 const domain = ref('gabbo.cl'); 
+const search = ref(''); 
+
 const name = ref('Juan Gabriel Mansilla');
 const darkMode = ref(true);
 const profession = ref('Full Stack Developer');
@@ -28,9 +30,9 @@ watch(selectedTheme, (newTheme, oldTheme) => {
 });
 
 
-    const toggleDarkMode = () => {
-      darkMode.value = !darkMode.value;
-    };
+const toggleDarkMode = () => {
+  darkMode.value = !darkMode.value;
+};
 
 const tags = ref([
   {
@@ -330,6 +332,15 @@ const portfolio = ref([
   // Agrega más proyectos según sea necesario
 ]);
 
+const getPortfolioData = computed(() => {
+  return portfolio?.filter((item) => {
+    return (
+      (item?.project && item?.project.includes(search)) ||
+      (item?.description && item?.description.includes(search))
+    );
+  }) ?? [];
+});
+
 const activeItem = ref(null);
 
 const handleScroll = () => {
@@ -446,7 +457,7 @@ onBeforeUnmount(() => {
              <i :class="option?.icon"></i> {{ option.name }}
           </label> y tal vez también cuento con habilidades en.. <input type="text" class="input-style" :style="{ 
               color: selectedOption.primaryColor
-            }" placeholder="Ej: websocket, unit test..." />
+            }" placeholder="Ej: websocket, unit test..." v-model="search" />
 
       </div>
 
@@ -476,7 +487,7 @@ onBeforeUnmount(() => {
 
       <div class="education-container" id="portafolio">
         <h3 :style="{ backgroundColor: selectedOption.backgroundColor }">Portafolio</h3>
-          <div v-for="(project, index) in portfolio" :key="index"  class="item-course">
+          <div v-for="(project, index) in getPortfolioData" :key="index"  class="item-course">
             <img
               :src="project.icon"
               alt="Icon"

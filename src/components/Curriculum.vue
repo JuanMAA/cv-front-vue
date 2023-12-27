@@ -487,7 +487,7 @@ onBeforeUnmount(() => {
 
       <div class="education-container" id="portafolio">
         <h3 :style="{ backgroundColor: selectedOption.backgroundColor }">Portafolio</h3>
-          <div v-for="(project, index) in getPortfolioData" :key="index"  class="item-course">
+          <div v-for="(project, index) in portfolio" :key="index"  class="item-course">
             <img
               :src="project.icon"
               alt="Icon"

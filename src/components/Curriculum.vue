@@ -412,7 +412,7 @@ onBeforeUnmount(() => {
           <h3 :style="{ backgroundColor: selectedOption.primaryColor }">Experiencia <i class="fa-solid fa-up-right-from-square"></i></h3>
         </div>
         <div>
-          <h3 :style="{ backgroundColor: selectedOption.backgroundColor }" class="login-button" >Ir a Linkedin <i class="fa-solid fa-link"></i></h3>
+          <h3 :style="{ paddingTop: 15,backgroundColor: selectedOption.backgroundColor }" class="login-button" >Ir a Linkedin <i class="fa-solid fa-link"></i></h3>
         </div>
         <div>
           <h3 :style="{ backgroundColor: selectedOption.backgroundColor }" class="login-button">Contactame <i class="fa-solid fa-comment"></i></h3>
@@ -497,17 +497,7 @@ onBeforeUnmount(() => {
               <p class="bg-white">
                 {{ project.description }} ({{ project.year }})
               </p>
-              <div>
-              <label v-for="option in tags" :key="option.name" class="tags" 
-                        v-show="option.categories.includes(selectedTheme)"
-                        :style="{ 
-              backgroundColor: selectedOption.name == option.name ? selectedOption.backgroundColor : 'white',
-              color: selectedOption.name == option.name ? 'white' : selectedOption.primaryColor
-            }">
-             {{ option.name }}
-           </label> 
-           </div>
-                          <div style="padding-top: 20px">
+                          <div >
 
               <a class="art-deco-link" :href="project.link" target="_blank">              
               <i class="fa-solid fa-link"></i> Ver proyecto

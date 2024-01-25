@@ -188,20 +188,20 @@ const tags = ref([
     textColor: '#2f4a60',
     categories: ['cc']
   },
-  {
-    name: 'Personal Branding Consultant',
-    primaryColor: '#4c4c4c',
-    backgroundColor: '#54bb56',
-    textColor: '#2f4a60',
-    categories: ['cc']
-  },
-  {
-    name: 'Web Accessibility Consultant',
-    primaryColor: '#4c4c4c',
-    backgroundColor: '#54bb56',
-    textColor: '#2f4a60',
-    categories: ['cc']
-  }
+  //{
+  //  name: 'Personal Branding Consultant',
+  //  primaryColor: '#4c4c4c',
+  //  backgroundColor: '#54bb56',
+  //  textColor: '#2f4a60',
+  //  categories: ['cc']
+  //},
+  //{
+  //  name: 'Web Accessibility Consultant',
+  //  primaryColor: '#4c4c4c',
+  //  backgroundColor: '#54bb56',
+  //  textColor: '#2f4a60',
+  //  categories: ['cc']
+  //}
 ]);
 
 const contact = ref([
@@ -237,16 +237,36 @@ const education = ref([
     institution: 'AIEP',
     degree: 'Ingeniería en Informática mención Desarrollo de Sistemas',
     year: '2018-2022',
+    description: 'Formación integral en programación, diseño de software y gestión de proyectos para crear soluciones innovadoras en el ámbito de la informática.',
     icon: 'https://www.curriculumnacional.cl/docente/629/articles-180962_imagen_portada.thumb_iNormal.jpg',
-    categories: ['fd', 'fs', 'bd']
+    categories: ['fd', 'fs', 'bd'],
+    tags: [
+      'Gestión de proyectos informáticos',
+      'Arquitectura de software',
+      'Modelamiento de procesos de negocios'
+    ]
   },
   {
     institution: 'Platzi',
     degree: 'Front-End con Vue',
     year: '2023',
-    description: 'funcionamiento más básico hasta su uso como framework implementando diversas librerías.',
+    description: 'Funcionamiento más básico hasta su uso como framework implementando diversas librerías.',
     icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMq4odFRbUxvuSxp1owv99ybwwEcm1UX9eI6-LVQ-GZg9sTalt33zGrnWjbV2ouI7Wg18&usqp=CAU',
-    categories: ['Vue.js']
+    categories: ['Vue.js'],
+    tags: [
+      'Vue 2',
+      'Vue 3',
+      'Nuxt 2',
+      'JS',
+      'TS',
+      'Pinia',
+      'Vuex',
+      'Vue Router',
+      'Unit Test',
+      'Composition API',
+      'Options API',
+      'SSR'
+    ]
   }
 ]);
 
@@ -263,7 +283,13 @@ const work = ref([
     degree: 'Front-End con Vue',
     year: '2023',
     description: 'funcionamiento más básico hasta su uso como framework implementando diversas librerías.',
-    icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMq4odFRbUxvuSxp1owv99ybwwEcm1UX9eI6-LVQ-GZg9sTalt33zGrnWjbV2ouI7Wg18&usqp=CAU'
+    icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMq4odFRbUxvuSxp1owv99ybwwEcm1UX9eI6-LVQ-GZg9sTalt33zGrnWjbV2ouI7Wg18&usqp=CAU',
+    tags: [
+      'Pinia',
+      'Vue 2',
+      'Vue 3',
+      'Nuxt 2'
+    ]
   }
 ]);
 
@@ -311,7 +337,11 @@ const portfolio = ref([
       'Experienced Full Stack Developer with a passion for creating efficient and scalable web applications. Proven track record in delivering high-quality software solutions from concept to deployment.',
     year: '2024',
     link: 'https://ejemplo.com/proyecto1',
-    icon: 'https://cdn3.iconfinder.com/data/icons/social-network-30/512/social-06-512.png'
+    icon: 'https://cdn3.iconfinder.com/data/icons/social-network-30/512/social-06-512.png',
+    tags: [
+      'Photoshop',
+      'Youtube'
+    ]
   },
   {
     project: 'Youtube - Futbol Digital',
@@ -319,7 +349,11 @@ const portfolio = ref([
       'Experienced Full Stack Developer with a passion for creating efficient and scalable web applications. Proven track record in delivering high-quality software solutions from concept to deployment.',
     year: '2024',
     link: 'https://ejemplo.com/proyecto1',
-        icon: 'https://cdn3.iconfinder.com/data/icons/social-network-30/512/social-06-512.png'
+        icon: 'https://cdn3.iconfinder.com/data/icons/social-network-30/512/social-06-512.png',
+        tags: [
+      'Photoshop',
+      'Youtube'
+    ]
   },
   {
     project: 'Adobe Stock - Gabbo',
@@ -328,6 +362,10 @@ const portfolio = ref([
     year: '2024',
     link: 'https://branditechture.agency/brand-logos/wp-content/uploads/wpdm-cache/Adobe-Stock-900x0.png',
         icon: 'https://branditechture.agency/brand-logos/wp-content/uploads/wpdm-cache/Adobe-Stock-900x0.png',
+          tags: [
+      'Photoshop',
+      'Adobe Ilustrator'
+    ]
   },
   // Agrega más proyectos según sea necesario
 ]);
@@ -412,7 +450,7 @@ onBeforeUnmount(() => {
           <h3 :style="{ backgroundColor: selectedOption.primaryColor }">Experiencia <i class="fa-solid fa-up-right-from-square"></i></h3>
         </div>
         <div>
-          <h3 :style="{ paddingTop: 15,backgroundColor: selectedOption.backgroundColor }" class="login-button" >Ir a Linkedin <i class="fa-solid fa-link"></i></h3>
+          <h3 :style="{ marginTop: 15 ,backgroundColor: selectedOption.backgroundColor }" class="login-button" >Ir a Linkedin <i class="fa-solid fa-link"></i></h3>
         </div>
         <div>
           <h3 :style="{ backgroundColor: selectedOption.backgroundColor }" class="login-button">Contactame <i class="fa-solid fa-comment"></i></h3>
@@ -435,7 +473,7 @@ onBeforeUnmount(() => {
       <div class="education-container" id="sss">
         !Hola, soy <b :style="{ 
               color: selectedOption.primaryColor
-            }" >Juan (Gabbbo) Mansilla</b> y soy 
+            }" >Juan (Gabo) Mansilla</b> y soy 
         <select name="lenguajes" id="lang" v-model="selectedTheme" class="select" :style="{ 
               backgroundColor: selectedOption.backgroundColor ?? 'white',
               color: white
@@ -477,11 +515,37 @@ onBeforeUnmount(() => {
           <p class="bg-white">
             {{ edu.description }}
           </p>
-          <a class="art-deco-link pb-nn" :href="edu?.link" target="_blank"
-            >
-            <i class="fa-solid fa-award"></i>
-            Ver certificado</a
-          >
+            <div>
+              <label v-for="tag in edu?.tags" class="radio-button" 
+                  :style="{ backgroundColor: 'white', color: selectedOption.primaryColor }">
+                  {{ tag }}
+              </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="experiencia-container" id="experiencia" >
+        <h3 :style="{ backgroundColor: selectedOption.backgroundColor }">Experiencia</h3>
+          <div v-for="(edu, index) in education" :key="index" class="item-course"  :style="{ color: selectedOption.primaryColor }"
+               v-show="edu?.categories.includes(selectedTheme) || edu?.categories.includes(selectedOption?.name)">
+          <div class="title">
+            <img
+              :src="edu.icon"
+              alt="Icon"
+              class="list-icon"
+            />
+            <strong> {{ edu.degree }}</strong>
+            - {{ edu.institution }} ({{ edu.year }})
+            </div>
+          <p class="bg-white">
+            {{ edu.description }}
+          </p>
+            <div>
+              <label v-for="tag in edu?.tags" class="radio-button" 
+                  :style="{ backgroundColor: 'white', color: selectedOption.primaryColor }">
+                  {{ tag }}
+              </label>
+          </div>
         </div>
       </div>
 
@@ -497,15 +561,12 @@ onBeforeUnmount(() => {
               <p class="bg-white">
                 {{ project.description }} ({{ project.year }})
               </p>
-                          <div >
-
-              <a class="art-deco-link" :href="project.link" target="_blank">              
-              <i class="fa-solid fa-link"></i> Ver proyecto
-            </a>
-            <a class="art-deco-link" :href="edu?.link" target="_blank">
-              <i class="fa-brands fa-github"></i>
-            </a>
-                       </div>
+              <div>
+              <label v-for="tag in project?.tags" class="radio-button" 
+                  :style="{ backgroundColor: 'white', color: selectedOption.primaryColor }">
+                  {{ tag }}
+              </label>
+              </div>
           </div>
       </div>
     </div>

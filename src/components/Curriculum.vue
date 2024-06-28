@@ -287,7 +287,7 @@ const work = ref([
     tags: [
       'Pinia',
       'Vue 2',
-      'Vue 3',
+      'Vue 3', 
       'Nuxt 2'
     ]
   }
